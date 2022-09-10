@@ -14,58 +14,25 @@ class gridgame():
             self.board[0][i]="B-"+p2[i]
 
     def changeBoard(self,player,cmd):
-        if(player=='A'):
-            for i in range(5):
-                for j in range(5):
-                    if(self.board[i][j]==player+'-'+cmd[:2]):
-                        if((cmd[3:]=='L' and j==0) or (cmd[3:]=='R' and j==4) or (cmd[3:]=='B' and i==4) or (cmd[3:]=='F' and i==0 )):
-                                print("invalid command..")
-                                return False
-                        elif(cmd[3:]=='F'):
-                            self.board[i-1][j]=self.board[i][j]
-                            self.board[i][j]='....'
-                            return True
-                        elif(cmd[3:]=='B'):
-                            self.board[i+1][j]=self.board[i][j]
-                            self.board[i][j]='....'
-                            return True
-                        elif(cmd[3:]=='L'):
-                            self.board[i][j-1]=self.board[i][j]
-                            self.board[i][j]='....'
-                            return True
-                        elif(cmd[3:]=='R'):
-                            self.board[i][j+1]=self.board[i][j]
-                            self.board[i][j]='....'
-                            return True
-
-                    
-        if(player=='B'):
-            for i in range(5):
-                for j in range(5):
-                    print(self.board[i][j],player+'-'+cmd[:2])
-                    if(self.board[i][j]==player+'-'+cmd[:2]):
-                        if((cmd[3:]=='L' and j==0) or (cmd[3:]=='R' and j==4) or (cmd[3:]=='B' and i==0) or (cmd[3:]=='F' and i==4 )):
-                                print(cmd[3:],i,j)
-                                print("invalid command..")
-                                return False
-                        elif(cmd[3:]=='F'):
-                            print("reached",i,j)
-                            self.board[i+1][j]=self.board[i][j]
-                            self.board[i][j]='....'
-                            return True
-                        elif(cmd[3:]=='B'):
-                            self.board[i-1][j]=self.board[i][j]
-                            self.board[i][j]='....'
-                            return True
-                        elif(cmd[3:]=='L'):
-                            self.board[i][j+1]=self.board[i][j]
-                            self.board[i][j]='....'
-                            return True
-                        elif(cmd[3:]=='R'):
-                            self.board[i][j-1]=self.board[i][j]
-                            self.board[i][j]='....'
-                            return True
-        return True
+        for i in range(5):
+            for j in range(5):
+                if(self.board[i][j]==player+'-'+cmd[:2]):
+                    newi=i
+                    newj=j
+                    if((player=='A' and ((cmd[3:]=='L' and j==0) or (cmd[3:]=='R' and j==4) or (cmd[3:]=='B' and i==4) or (cmd[3:]=='F' and i==0 ) )) or (player=='B' and  ((cmd[3:]=='L' and j==0) or (cmd[3:]=='R' and j==4) or (cmd[3:]=='B' and i==0) or (cmd[3:]=='F' and i==4 )))):
+                            print("invalid command..")
+                            return False
+                    elif((cmd[3:]=='F' and player=='A') or (cmd[3:]=='B' and player=='B')):
+                        newi=i-1
+                    elif((cmd[3:]=='B' and player=='A') or (cmd[3:]=='F' and player=='B') ):
+                        newi=i+1
+                    elif((cmd[3:]=='L' and player=='A') or (cmd[3:]=='R' and player=='B') ):
+                        newj=j-1
+                    elif((cmd[3:]=='R' and player=='A') or (cmd[3:]=='L' and player=='B')):
+                        newj=j+1
+                    self.board[newi][newj]=self.board[i][j]
+                    self.board[i][j]='....'
+                    return True
 
     def printboard(self):
         for i in self.board:
