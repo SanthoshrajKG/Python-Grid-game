@@ -37,7 +37,7 @@ while(opt=='y'):
         p2=input()
         if grid.changeBoard(p2):
             break
-    opt=input("y/n to continue?...")
+    opt=input("y/n to continue?.....")
 
 
 
