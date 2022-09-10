@@ -3,7 +3,7 @@ Problem Statement:
 
 # Objective: Build a turn based chess like game, a program that accepts commands to make moves over the cli (command line interface)
 
-Game rules:
+# Game rules:
 There are 2 players playing it
 The game is played on a square grid of 5 by 5 blocks
 Each player has a team of 5 characters that start from their end
